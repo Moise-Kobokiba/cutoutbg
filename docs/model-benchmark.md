@@ -1,11 +1,9 @@
-# Model benchmark
+# Phase 1C benchmark protocol
 
-The fixture manifest is `tests/benchmark/manifest.json`. It intentionally contains no images until provenance and repository redistribution permission are recorded. Add only project-owned, generated, public-domain, or permissively licensed fixtures with dimensions, category, source, usage permission, expected subject, and difficulty metadata.
+Run the fast suite with `PYTHONPATH=src .venv/bin/python -m pytest`. Run the learned-model benchmark separately because it requires the pinned local cache and can take several minutes:
 
-Example evaluation command after the pinned checkpoint is cached:
+`PYTHONPATH=src .venv/bin/python scripts/run_phase1c.py tests/fixtures --cache-dir ./model-cache --device cpu --warm-samples 3 --output-dir ./benchmark-results/phase1c`
 
-```sh
-python -m cutoutbg.cli benchmark tests/benchmark --model birefnet-general --device cpu --cache-dir /path/to/huggingface-cache
-```
+The runner loads the model once, records cold load and first-sample timing, then records preprocessing, inference, postprocessing, total time, alpha extrema, suspicious-mask flags, repeated warm statistics, environment details, and peak process RSS. CUDA is only run when PyTorch reports a usable NVIDIA device; unavailable GPU measurements must remain explicitly unavailable.
 
-The runner currently reports per-image elapsed time and success/failure. Cold and warm inference, preprocessing/postprocessing, peak memory, objective mask metrics, and qualitative review remain required before a recommendation. No benchmark result is valid without actual fixture images and recorded hardware.
+All fixture provenance is in `tests/benchmark/manifest.json`. Fixtures are project-generated and do not provide ground truth. Therefore IoU, Dice, precision, recall, and boundary metrics are N/A. Generated outputs and benchmark JSON are ignored by Git. Review outputs category-by-category before changing the decision in `docs/model-benchmark-results.md`.

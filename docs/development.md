@@ -1,14 +1,9 @@
 # Development
 
-Create an isolated environment and install the test extra for ordinary checks:
+Install the package and fast-test dependencies in `.venv`. The normal suite does not download model weights:
 
-```sh
-python -m venv .venv
-. .venv/bin/activate
-python -m pip install -e '.[test]'
-pytest
-```
+`pip install -e '.[test]'`
 
-For learned-model evaluation, install `.[ml,test]` in an isolated environment. Acquire the pinned checkpoint and its exact-revision remote-code files with `python scripts/acquire_birefnet.py --cache-dir ./model-cache`, or verify an existing cache with `--offline`. Then run `python -m cutoutbg benchmark tests/benchmark --model birefnet-general --device cpu --cache-dir ./model-cache`. Do not commit model weights or benchmark outputs. The ordinary test suite does not require ML dependencies.
+`PYTHONPATH=src python -m pytest`
 
-Phase 1A is not production-ready and does not provide a web service, accounts, billing, or deployment infrastructure.
+For learned-model evaluation, install `.[ml,test]`, acquire the exact pinned checkpoint with `python scripts/acquire_birefnet.py --cache-dir ./model-cache`, and run the Phase 1C benchmark from `docs/model-benchmark.md`. Use `--offline` to verify a cache without network access. Do not commit model caches, generated outputs, or benchmark JSON. Do not treat generated fixtures as ground truth.

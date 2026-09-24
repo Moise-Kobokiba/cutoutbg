@@ -1,13 +1,17 @@
 {
   "fixtures": [
-    {
-      "filename": "../fixtures/phase1b-generated-subject.png",
-      "source": "Generated with v0 GenerateImage for this repository evaluation",
-      "license": "Project-generated evaluation fixture; no third-party source asset",
-      "provenance": "Created 2026-09-24 for Phase 1B; single red ceramic mug on blue background",
-      "category": ["products", "objects", "complex-backgrounds"],
-      "dimensions": [1024, 1024],
-      "notes": "Useful for pipeline/output validation only; no ground-truth mask supplied."
-    }
+    {"fixture_id":"phase1b-mug","filename":"phase1b-generated-subject.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic product image","category":["products","objects"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-person","filename":"phase1c-person.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["people","difficult-backgrounds"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-hair","filename":"phase1c-hair.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["hair","fine-detail"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-animal","filename":"phase1c-animal.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["animals","fur"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-products","filename":"phase1c-products.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["products","clothing"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-clothing","filename":"phase1c-clothing.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["clothing","fine-detail"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-vehicle","filename":"phase1c-vehicle.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["vehicles","thin-structures"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-objects","filename":"phase1c-objects.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["objects","plants","difficult-backgrounds"],"notes":"No ground truth."},
+    {"fixture_id":"phase1c-transparent","filename":"phase1c-transparent.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image","category":["transparent-objects","reflections"],"notes":"Binary masks cannot establish true transparency quality."},
+    {"fixture_id":"phase1c-graphic","filename":"phase1c-graphic.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic graphic","category":["logos-graphics"],"notes":"No real brand; no ground truth."},
+    {"fixture_id":"phase1c-lowres","filename":"phase1c-lowres.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image; resize required before benchmark","category":["low-resolution"],"notes":"Normalize to 96x96 for resolution test."},
+    {"fixture_id":"phase1c-wide","filename":"phase1c-wide.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic wide image","category":["resolution","thin-structures"],"notes":"Normalize to 1600x900 for aspect-ratio test."},
+    {"fixture_id":"phase1c-highres","filename":"phase1c-highres.png","source":"Generated with v0 GenerateImage","source_url":null,"license":"Project-generated evaluation fixture","provenance_status":"documented; no third-party asset","generation_method":"prompted synthetic image; resize required before benchmark","category":["high-resolution","objects"],"notes":"Normalize to 1600x1200 for large-image test."}
   ]
 }
