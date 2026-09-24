@@ -1,0 +1,2 @@
+[console_scripts]
+cutoutbg = cutoutbg.cli:main

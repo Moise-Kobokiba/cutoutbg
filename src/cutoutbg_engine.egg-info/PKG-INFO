@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: cutoutbg-engine
+Version: 0.1.0
+Summary: Local, license-gated background removal engine proof of concept
+Requires-Python: >=3.11
+Requires-Dist: Pillow<13,>=10.0.0
+Provides-Extra: numpy
+Requires-Dist: numpy<3,>=1.26; extra == "numpy"
+Provides-Extra: test
+Requires-Dist: pytest<9,>=8.0; extra == "test"

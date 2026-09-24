@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cutoutbg-engine"
+version = "0.1.0"
+description = "Local, license-gated background removal engine proof of concept"
+requires-python = ">=3.11"
+dependencies = [
+  "Pillow>=10.0.0,<13",
+]
+
+[project.optional-dependencies]
+numpy = ["numpy>=1.26,<3"]
+test = ["pytest>=8.0,<9"]
+
+[project.scripts]
+cutoutbg = "cutoutbg.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.packages.find]
+where = ["src"]
