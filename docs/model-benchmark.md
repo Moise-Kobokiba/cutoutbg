@@ -1,9 +1,11 @@
 # Model benchmark
 
-Run `python -m cutoutbg.cli benchmark tests/benchmark --model center-contrast-smoke-test`. The runner records model, image, dimensions, device, elapsed time, success, and errors as JSON. Fixture folders are present under `tests/benchmark/`; no images or results are fabricated.
+The fixture manifest is `tests/benchmark/manifest.json`. It intentionally contains no images until provenance and repository redistribution permission are recorded. Add only project-owned, generated, public-domain, or permissively licensed fixtures with dimensions, category, source, usage permission, expected subject, and difficulty metadata.
 
-Benchmark timing currently includes validation, preprocessing, inference, postprocessing, and encoding. Cold-start and warm-inference measurements are future work for learned adapters. Ground-truth metrics (IoU, Dice, precision, recall, and boundary metrics) must only be calculated when a matching mask fixture exists.
+Example evaluation command after the pinned checkpoint is cached:
 
-## Results
+```sh
+python -m cutoutbg.cli benchmark tests/benchmark --model birefnet-general --device cpu --cache-dir /path/to/huggingface-cache
+```
 
-See `docs/model-benchmark-results.md`. The smoke-test adapter is not a quality benchmark and must not be used to claim segmentation accuracy.
+The runner currently reports per-image elapsed time and success/failure. Cold and warm inference, preprocessing/postprocessing, peak memory, objective mask metrics, and qualitative review remain required before a recommendation. No benchmark result is valid without actual fixture images and recorded hardware.

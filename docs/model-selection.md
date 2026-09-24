@@ -1,17 +1,11 @@
 # Model selection
 
-Phase 1 intentionally does not approve a learned production model. The only executable adapter is `center-contrast-smoke-test`, a deterministic dependency-light smoke-test model with no downloaded weights. It proves the contract and pipeline without making unsupported commercial-use claims.
+## Phase 1A candidate
 
-## Candidates requiring license gates
+BiRefNet general is the first learned adapter because the upstream project publishes an official implementation and Hugging Face checkpoint. The exact model identifier is `zhengpeng7/BiRefNet`, pinned to revision `e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4`. The adapter uses the official 1024x1024 preprocessing recipe and restores masks to the source dimensions.
 
-| Candidate | Source | Phase 1 status |
-|---|---|---|
-| BiRefNet | https://github.com/ZhengPeng7/BiRefNet | Not downloaded; code/weight release terms require review |
-| RMBG-2.0 | https://huggingface.co/briaai/RMBG-2.0 | Not downloaded; BRIA weight terms require explicit review |
-| U²-Net | https://github.com/xuebinqin/U-2-Net | Not downloaded; weight provenance and terms require review |
-| MODNet | https://github.com/ZHKKKe/MODNet | Not downloaded; portrait-focused comparison only |
-| SAM | https://github.com/facebookresearch/segment-anything | Not downloaded; research comparison only |
+The adapter is intentionally optional and lazy: ordinary CI does not install or download PyTorch, torchvision, Transformers, or model weights. Install the `ml` extra only for a local evaluation, provide a populated revision-pinned cache, and run with `--cache-dir`. Commercial status remains `REQUIRES LEGAL REVIEW`; no production recommendation has been made.
 
 ## Contract
 
-`SegmentationModel` exposes metadata, `load`, `preprocess`, `infer`, `postprocess`, and `close`. The pipeline never imports a model-specific package. A future learned adapter must provide exact revision, code license, weight license, attribution, redistribution, runtime, and device support before it is enabled.
+All models implement `SegmentationModel`. The pipeline receives only an alpha mask and does not depend on BiRefNet internals.

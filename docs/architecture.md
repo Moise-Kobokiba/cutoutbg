@@ -1,15 +1,9 @@
-# CutoutBG architecture
+# Architecture
 
-Phase 1 adds a local Python engine under `src/cutoutbg`. It is intentionally isolated from the future web/API topology. The engine flow is:
+## Phase 1A boundary
 
-```text
-explicit file path -> byte/magic/type/size validation -> EXIF-safe RGB image -> SegmentationModel -> L alpha mask -> RGBA PNG
-```
+CutoutBG remains a local Python inference engine. `pipeline.py` owns untrusted-image validation and output assembly. `model.py` owns the stable `SegmentationModel` contract and model factory. `birefnet.py` is an optional, lazy adapter for the exact pinned BiRefNet checkpoint; it is not imported or downloaded by ordinary tests.
 
-`SegmentationModel` is the model boundary. The current `center-contrast-smoke-test` adapter exists only to prove validation, lifecycle, mask, and output contracts. Learned model adapters must be license-gated and can replace it without changing the pipeline or CLI contract.
+Weights are external cache artifacts, never repository files. Learned inference requires explicit optional dependencies and a cache path. The adapter reports structured load failures to the CLI rather than making the rest of the pipeline aware of PyTorch or Transformers internals.
 
-The future Phase 2 topology remains Next.js web app -> TypeScript API -> queue -> Python worker, with PostgreSQL as source of truth and private object storage for user data. Phase 1 does not add public API, authentication, billing, deployment, or uploads.
-
-## Security boundaries
-
-Inputs are untrusted. The validator checks size, magic bytes, decoder verification, dimensions, pixel count, and format. Processing uses Pillow, never shell execution, and writes only the requested output path. Temporary files and external uploads are not used.
+No web UI, accounts, billing, production API, GPU deployment, or production claims are part of Phase 1A.

@@ -11,7 +11,7 @@ from .pipeline import InputValidationError, remove_background, validate_path
 
 def remove_command(args: argparse.Namespace) -> int:
     started = time.perf_counter()
-    model = create_model(args.model)
+    model = create_model(args.model, cache_dir=args.cache_dir)
     try:
         model.load(args.device)
         image = validate_path(args.input)
@@ -35,7 +35,7 @@ def benchmark_command(args: argparse.Namespace) -> int:
         if not path.is_file() or path.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp"}:
             continue
         started = time.perf_counter()
-        model = create_model(args.model)
+        model = create_model(args.model, cache_dir=args.cache_dir)
         try:
             model.load(args.device)
             image = validate_path(path)
@@ -57,11 +57,13 @@ def main() -> int:
     remove.add_argument("--output", type=Path, required=True)
     remove.add_argument("--model", default="center-contrast-smoke-test")
     remove.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
+    remove.add_argument("--cache-dir", type=Path)
     remove.set_defaults(function=remove_command)
     benchmark = subparsers.add_parser("benchmark", help="benchmark a fixture directory")
     benchmark.add_argument("directory", type=Path)
     benchmark.add_argument("--model", default="center-contrast-smoke-test")
     benchmark.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
+    benchmark.add_argument("--cache-dir", type=Path)
     benchmark.set_defaults(function=benchmark_command)
     args = parser.parse_args()
     return args.function(args)

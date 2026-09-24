@@ -1,5 +1,5 @@
-# Phase 1 benchmark results
+# Phase 1A benchmark results
 
-No benchmark images were supplied, so no runtime, quality, or memory result is reported. The repository contains the category structure and a reproducible runner only.
+No learned-model benchmark was run. The repository contains an empty, provenance-gated fixture manifest and no downloaded weights. Therefore there are no factual latency, memory, quality, IoU, Dice, success-rate, or failure measurements to report.
 
-The executable smoke-test adapter is a deterministic pipeline fixture, not a production segmentation model. A valid Phase 1 learned-model result requires licensed weights, a fixed hardware description, warm/cold timing, peak memory, successful outputs, failures, and qualitative or ground-truth review.
+The BiRefNet adapter and revision pin are implemented, but evaluation requires a populated local cache and approved fixtures. The recommendation remains unresolved: continue commercial evaluation only after legal review of the exact checkpoint and after measured benchmark results.

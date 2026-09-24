@@ -83,7 +83,10 @@ class CenterContrastModel:
         self._loaded = False
 
 
-def create_model(name: str) -> SegmentationModel:
+def create_model(name: str, **kwargs: Any) -> SegmentationModel:
     if name == "center-contrast-smoke-test":
         return CenterContrastModel()
+    if name == "birefnet-general":
+        from .birefnet import BiRefNetModel
+        return BiRefNetModel(**kwargs)
     raise ValueError(f"unknown model: {name}")
