@@ -1,0 +1,6 @@
+import type { Metadata } from "next"
+import Link from "next/link"
+import { SiteHeader } from "@/components/site-header"
+import { PrototypeForm } from "@/components/prototype-form"
+export const metadata: Metadata = { title: "Log in — CutoutBG", description: "Log in to the future CutoutBG workspace." }
+export default function LoginPage() { return <><SiteHeader /><main className="mx-auto grid max-w-[1100px] gap-12 px-5 pb-24 pt-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:px-8 lg:pt-20"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-[var(--muted)]">Account</p><h1 className="mt-4 font-display text-5xl font-bold tracking-[-.06em]">Log in to CutoutBG</h1><p className="mt-5 max-w-md leading-7 text-[var(--muted)]">Accounts are not connected yet. This page previews the experience without creating a session.</p></div><section className="rounded-3xl border border-[var(--line)] bg-[var(--panel)] p-6 sm:p-8"><PrototypeForm kind="login" /><div className="mt-5 flex items-center justify-between gap-4 text-sm"><span className="text-[var(--muted)]">Forgot password?</span><Link href="/signup" className="font-bold">Sign up</Link></div><p className="mt-6 text-xs leading-5 text-[var(--muted)]">Social sign-in will be considered in a future authentication release.</p></section></main></> }
