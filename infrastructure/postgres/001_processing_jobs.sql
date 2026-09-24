@@ -1,0 +1,4 @@
+create table if not exists processing_jobs (id uuid primary key, status text not null check (status in ('queued','processing','completed','failed')), original_filename text not null, input_mime_type text not null, input_size_bytes bigint not null, input_width integer, input_height integer, output_mime_type text, output_size_bytes bigint, output_width integer, output_height integer, input_storage_key text not null, output_storage_key text, error_code text, error_message text, created_at timestamptz not null, started_at timestamptz, completed_at timestamptz, expires_at timestamptz);
+create index if not exists processing_jobs_status_idx on processing_jobs(status);
+create index if not exists processing_jobs_created_at_idx on processing_jobs(created_at);
+create index if not exists processing_jobs_expires_at_idx on processing_jobs(expires_at);

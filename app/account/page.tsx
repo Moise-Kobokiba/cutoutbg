@@ -1,0 +1,5 @@
+import type { Metadata } from "next"
+import { WorkspaceShell } from "@/components/workspace-shell"
+export const metadata: Metadata = { title: "Account — CutoutBG", description: "Manage your future CutoutBG account." }
+const sections = [["Profile", "Name and email will be available after authentication is connected."], ["Preferences", "Theme and processing preferences will be saved here."], ["Security", "Password and security settings are not connected yet."], ["Plan", "Your current plan will appear here when billing exists."]]
+export default function AccountPage() { return <WorkspaceShell title="Account"><div className="mt-8 grid gap-4">{sections.map(([title, copy]) => <section key={title} id={title === "Preferences" ? "settings" : undefined} className="rounded-3xl border border-[var(--line)] bg-[var(--panel)] p-6"><h2 className="font-display text-xl font-bold">{title}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--muted)]">{copy}</p></section>)}<button type="button" disabled className="mt-2 w-fit rounded-full border border-[var(--line)] px-5 py-3 text-sm font-bold text-[var(--muted)]">Sign out · Coming soon</button></div></WorkspaceShell> }
