@@ -8,3 +8,8 @@ Provides-Extra: numpy
 Requires-Dist: numpy<3,>=1.26; extra == "numpy"
 Provides-Extra: test
 Requires-Dist: pytest<9,>=8.0; extra == "test"
+Provides-Extra: ml
+Requires-Dist: torch<3,>=2.2; extra == "ml"
+Requires-Dist: torchvision<1,>=0.17; extra == "ml"
+Requires-Dist: transformers<5,>=4.40; extra == "ml"
+Requires-Dist: huggingface-hub<1,>=0.23; extra == "ml"

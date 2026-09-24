@@ -67,7 +67,7 @@ class BiRefNetModel:
             self._model = AutoModelForImageSegmentation.from_pretrained(MODEL_ID, **kwargs)
         except (OSError, RuntimeError) as exc:
             raise RuntimeError(
-                f"BiRefNet revision {MODEL_REVISION} is unavailable in the configured cache"
+                f"BiRefNet revision {MODEL_REVISION} is unavailable in the configured local cache"
             ) from exc
         self._torch = torch
         self._transform = transforms.Compose([

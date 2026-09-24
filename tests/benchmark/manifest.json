@@ -1,5 +1,13 @@
 {
-  "version": 1,
-  "provenance_policy": "Only project-owned, generated, or redistributable images may be added.",
-  "images": []
+  "fixtures": [
+    {
+      "filename": "../fixtures/phase1b-generated-subject.png",
+      "source": "Generated with v0 GenerateImage for this repository evaluation",
+      "license": "Project-generated evaluation fixture; no third-party source asset",
+      "provenance": "Created 2026-09-24 for Phase 1B; single red ceramic mug on blue background",
+      "category": ["products", "objects", "complex-backgrounds"],
+      "dimensions": [1024, 1024],
+      "notes": "Useful for pipeline/output validation only; no ground-truth mask supplied."
+    }
+  ]
 }

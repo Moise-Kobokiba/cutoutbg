@@ -2,21 +2,25 @@
 
 ## BiRefNet general
 
-| Field | Record |
+| Field | Evidence |
 |---|---|
 | Model | `zhengpeng7/BiRefNet` |
-| Source | https://huggingface.co/zhengpeng7/BiRefNet and https://github.com/ZhengPeng7/BiRefNet |
-| Code license | MIT, evidenced by upstream `LICENSE` |
-| Weight license | Hugging Face model card declares MIT; exact checkpoint terms still require legal review |
-| Commercial use | Requires legal review before commercial use |
-| Attribution | Zheng Peng et al.; preserve MIT notice and paper citation |
+| Exact revision | `e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4` |
+| Repository | https://github.com/ZhengPeng7/BiRefNet |
+| Model repository | https://huggingface.co/zhengpeng7/BiRefNet/tree/e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4 |
+| Weight file | `model.safetensors`, published size `444,473,596` bytes |
+| Code license | Upstream repository publishes MIT license evidence |
+| Weight license | Hugging Face model metadata/README identifies MIT; exact checkpoint terms require review |
+| Commercial use | Not cleared; `REQUIRES LEGAL REVIEW` |
+| Attribution | Preserve upstream MIT notice and paper citation |
 | Redistribution | Do not redistribute weights until reviewed |
-| Model-weight restrictions | Checkpoint is loaded only at pinned revision `e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4` |
-| Training-data concerns | Upstream sources should be reviewed; this record does not establish training-data rights |
-| Evidence | Upstream MIT license; Hugging Face README `license: mit`; model config and official inference instructions |
-| Status | REQUIRES LEGAL REVIEW |
+| Training data | Not established by this repository audit; provenance and downstream rights remain unresolved |
 
-The adapter never commits weights. It accepts an explicit cache directory and uses `local_files_only` when one is supplied, preventing an evaluation from silently changing its cache contents. The model must not be described as commercially cleared or production-ready.
+The Hugging Face Git-LFS object id is `3b958f6368413c833b0abc357a1357cb78ce6d52`; this is not treated as a SHA-256 checksum. The acquisition script records the locally observed SHA-256 after download and supports cache-only verification.
+
+The adapter pins both the model id and revision and enables remote code only at that exact revision. Any dependency or remote-code change must be treated as a separate evaluation. This record is evidence tracking, not a legal opinion.
+
+**Status: REQUIRES LEGAL REVIEW.**
 
 ## Rejected or unresolved candidates
 
