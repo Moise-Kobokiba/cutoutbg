@@ -15,6 +15,6 @@ button:disabled { cursor: not-allowed; opacity: .55; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 .checkerboard { background-color: #f4f4ef; background-image: linear-gradient(45deg, #dfe4df 25%, transparent 25%), linear-gradient(-45deg, #dfe4df 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #dfe4df 75%), linear-gradient(-45deg, transparent 75%, #dfe4df 75%); background-size: 22px 22px; background-position: 0 0, 0 11px, 11px -11px, -11px 0; }
 .dark .checkerboard { background-color: #28322e; background-image: linear-gradient(45deg, #34413b 25%, transparent 25%), linear-gradient(-45deg, #34413b 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #34413b 75%), linear-gradient(-45deg, transparent 75%, #34413b 75%); }
-.removal-reveal { animation: remove-background 5s cubic-bezier(.65,0,.35,1) infinite alternate; }
-@keyframes remove-background { from { transform: scaleX(1); } to { transform: scaleX(0); } }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } .removal-reveal { transform: scaleX(0); } }
+.removal-background { animation: remove-background 5s cubic-bezier(.65,0,.35,1) infinite alternate; }
+@keyframes remove-background { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 100% 0 0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } .removal-background { clip-path: inset(0 100% 0 0); } }
