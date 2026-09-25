@@ -4,7 +4,9 @@ The local backend is split into a Fastify HTTP service, BullMQ queue, Python inf
 
 ## Development
 
-Install dependencies, start Redis/Postgres/MinIO with `docker compose up -d`, then run `REDIS_URL=redis://localhost:6379 npm run server` and `REDIS_URL=redis://localhost:6379 npm run worker`. The API listens on port 4100 by default.
+Docker is optional and is not required for ordinary frontend development. Run `npm run dev` for the Next.js application.
+
+The processing backend requires Redis, PostgreSQL, and an S3-compatible object store. Docker Compose remains the supported reproducible way to start that dependency set; native services or managed equivalents may be used instead. Once those services are available, run `REDIS_URL=redis://localhost:6379 npm run server` and `REDIS_URL=redis://localhost:6379 npm run worker`. The API listens on port 4100 by default.
 
 `POST /api/v1/jobs` accepts a multipart `file` field. `GET /api/v1/jobs/:id` returns lifecycle state and a controlled result URL. `GET /health` is process liveness; `/ready` requires Redis configuration.
 

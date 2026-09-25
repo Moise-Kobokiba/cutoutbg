@@ -1,11 +1,13 @@
 README.md
 pyproject.toml
 src/cutoutbg/__init__.py
+src/cutoutbg/__main__.py
 src/cutoutbg/birefnet.py
 src/cutoutbg/cli.py
 src/cutoutbg/integrity.py
 src/cutoutbg/model.py
 src/cutoutbg/pipeline.py
+src/cutoutbg/readiness.py
 src/cutoutbg_engine.egg-info/PKG-INFO
 src/cutoutbg_engine.egg-info/SOURCES.txt
 src/cutoutbg_engine.egg-info/dependency_links.txt
@@ -15,3 +17,5 @@ src/cutoutbg_engine.egg-info/top_level.txt
 tests/test_acquisition.py
 tests/test_birefnet.py
 tests/test_engine.py
+tests/test_phase1c.py
+tests/test_readiness.py

@@ -10,6 +10,7 @@
     "lint": "tsc --noEmit",
     "server": "tsx server/index.ts",
     "worker": "tsx -e \"import(\"./server/worker.ts\").then(({startWorker})=>startWorker())\"",
+    "test": "vitest run",
     "test:server": "vitest run server/api.test.ts"
   },
   "dependencies": {
