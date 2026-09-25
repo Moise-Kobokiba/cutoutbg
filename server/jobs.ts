@@ -1,7 +1,14 @@
 import { randomUUID } from 'node:crypto'
-export type JobStatus = 'queued'|'processing'|'completed'|'failed'
-export type Job = { id:string; status:JobStatus; originalFilename:string; inputMimeType:string; inputSizeBytes:number; inputStorageKey:string; outputStorageKey?:string; outputWidth?:number; outputHeight?:number; outputSizeBytes?:number; errorCode?:string; errorMessage?:string; createdAt:string; updatedAt:string; startedAt?:string; completedAt?:string }
-const jobs = new Map<string, Job>()
-export function createJob(input: Omit<Job,'id'|'status'|'createdAt'|'updatedAt'>) { const now=new Date().toISOString(); const job:Job={...input,id:randomUUID(),status:'queued',createdAt:now,updatedAt:now}; jobs.set(job.id,job); return job }
-export function getJob(id:string) { return jobs.get(id) }
-export function updateJob(id:string, patch:Partial<Job>) { const job=jobs.get(id); if(!job) return; Object.assign(job,patch,{updatedAt:new Date().toISOString()}); return job }
+import { Pool, type PoolClient } from 'pg'
+import { config } from './config'
+export type JobStatus='queued'|'processing'|'completed'|'failed'
+export type Job={id:string;status:JobStatus;originalFilename:string;inputMimeType:string;inputSizeBytes:number;inputStorageKey:string;outputStorageKey?:string;outputWidth?:number;outputHeight?:number;outputSizeBytes?:number;errorCode?:string;errorMessage?:string;createdAt:string;updatedAt:string;startedAt?:string;completedAt?:string;expiresAt?:string}
+const pool=config.databaseUrl?new Pool({connectionString:config.databaseUrl}):null
+const local=new Map<string,Job>()
+const row=(r:any):Job=>({id:r.id,status:r.status,originalFilename:r.original_filename,inputMimeType:r.input_mime_type,inputSizeBytes:r.input_size_bytes,inputStorageKey:r.input_storage_key,outputStorageKey:r.output_storage_key,outputWidth:r.output_width,outputHeight:r.output_height,outputSizeBytes:r.output_size_bytes,errorCode:r.error_code,errorMessage:r.error_message,createdAt:new Date(r.created_at).toISOString(),updatedAt:new Date(r.updated_at).toISOString(),startedAt:r.started_at&&new Date(r.started_at).toISOString(),completedAt:r.completed_at&&new Date(r.completed_at).toISOString(),expiresAt:r.expires_at&&new Date(r.expires_at).toISOString()})
+export async function createJob(input:Omit<Job,'id'|'status'|'createdAt'|'updatedAt'>){const id=randomUUID(); if(!pool){const now=new Date().toISOString();const j={...input,id,status:'queued' as const,createdAt:now,updatedAt:now};local.set(id,j);return j} const r=await pool.query('INSERT INTO processing_jobs (id,status,original_filename,input_mime_type,input_size_bytes,input_storage_key,expires_at) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *',[id,'queued',input.originalFilename,input.inputMimeType,input.inputSizeBytes,input.inputStorageKey,new Date(Date.now()+86400000)]);return row(r.rows[0])}
+export async function getJob(id:string){if(pool){const r=await pool.query('SELECT * FROM processing_jobs WHERE id=$1',[id]);return r.rows[0]?row(r.rows[0]):undefined}return local.get(id)}
+const transitions:Record<JobStatus,JobStatus[]>={queued:['processing','failed'],processing:['completed','failed'],completed:[],failed:[]}
+export async function transition(id:string,status:JobStatus,patch:Partial<Job>={}){const current=await getJob(id);if(!current||(!transitions[current.status].includes(status)&&current.status!==status))throw new Error('INVALID_JOB_TRANSITION');if(pool){const cols=['status'];const vals:[any, ...any[]]=[status];let i=2;for(const [key,value] of Object.entries(patch)){const db=key.replace(/[A-Z]/g,m=>`_${m.toLowerCase()}`);cols.push(`${db}=$${i++}`);vals.push(value)}vals.push(id);const r=await pool.query(`UPDATE processing_jobs SET ${cols.map((c,n)=>n===0?`${c}=$1`:c).join(', ')},updated_at=now() WHERE id=$${i} RETURNING *`,vals);return row(r.rows[0])}const j={...current,...patch,status,updatedAt:new Date().toISOString()};local.set(id,j);return j}
+export async function closeJobs(){await pool?.end()}
+export { pool }
