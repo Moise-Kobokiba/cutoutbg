@@ -4,6 +4,6 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN python3 -m venv /opt/cutoutbg-venv && /opt/cutoutbg-venv/bin/pip install --no-cache-dir -e .
+RUN python3 -m venv /opt/cutoutbg-venv && /opt/cutoutbg-venv/bin/pip install --no-cache-dir -e '.[ml]'
 ENV PATH=/opt/cutoutbg-venv/bin:$PATH
 EXPOSE 4100
