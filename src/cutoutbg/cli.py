@@ -24,6 +24,9 @@ def remove_command(args: argparse.Namespace) -> int:
     except InputValidationError as exc:
         print(json.dumps({"status": "failure", "error_category": exc.code, "error": exc.message}))
         return 2
+    except (RuntimeError, OSError, ValueError) as exc:
+        print(json.dumps({"status": "failure", "error_category": "inference_unavailable", "error": str(exc)}))
+        return 3
     finally:
         model.close()
 
