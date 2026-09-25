@@ -8,7 +8,7 @@ from .model import ModelMetadata
 
 MODEL_ID = "zhengpeng7/BiRefNet"
 MODEL_REVISION = "e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4"
-MODEL_CACHE_SUBDIR = "huggingface/zhengpeng7--BiRefNet/snapshots/" + MODEL_REVISION
+MODEL_CACHE_SUBDIR = "models--zhengpeng7--BiRefNet/snapshots/" + MODEL_REVISION
 
 
 class BiRefNetModel:
