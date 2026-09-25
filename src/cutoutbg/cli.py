@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .model import create_model
 from .pipeline import InputValidationError, remove_background, validate_path
+from .readiness import readiness_json
 
 
 def remove_command(args: argparse.Namespace) -> int:
@@ -68,6 +69,9 @@ def main() -> int:
     benchmark.add_argument("--device", default="auto", choices=["auto", "cpu", "cuda"])
     benchmark.add_argument("--cache-dir", type=Path)
     benchmark.set_defaults(function=benchmark_command)
+    readiness = subparsers.add_parser("readiness", help="report local BiRefNet readiness")
+    readiness.add_argument("--cache-dir", type=Path)
+    readiness.set_defaults(function=lambda args: print(readiness_json(str(args.cache_dir) if args.cache_dir else None)) or 0)
     args = parser.parse_args()
     return args.function(args)
 
